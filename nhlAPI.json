@@ -1,0 +1,167 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "NHL Statistics API",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://api.nhle.com",
+        "description": "NHL Statistics API Server"
+      }
+    ],
+    "paths": {
+      "/stats/rest/en/skater/summary?isGame=false&start=0&factCayenneExp=gamesPlayed>=1": {
+        "get": {
+          "operationId": "NHL_players",
+          "summary": "Get NHL Players by Points, Goals, Assists, or points per game.",
+          "description": "Retrieves the NHL players and their playerId sorted by either points, goals, assists or pointsPerGame, for any season from current (2023-2024) to 1917-1918. Search for top players or specific players by name. The playerId can be used for other querys.",
+          "parameters": [
+            {
+              "name": "limit",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "default": 10
+              }
+            },
+            {
+                "name": "isAggregate",
+                "in": "query",
+                "description":"Will aggregate (sum) player stats into a single sum. Set true when you need to sum data for multiple seasons to find totals across multiple years. Set false when looking at a single season or when you want to find totals on a season by season basis, this will return non-aggregated (summed) totals.",
+                "required": true,
+                "schema": {
+                  "type": "boolean",
+                  "default": false
+                }
+            },
+            {
+                "name": "sort",
+                "description": "Sort in an array of objects like so: [{property:value, direction:DESC}, {property value, direction:ASC}] where the property can be points, goals, assists, or pointsPerGame. You can add multiple sort properties to the array such as points and goals, to sort by points, then by goals. The last property is always: {\"property\":\"playerId\",\"direction\":\"ASC\"}",
+                "in": "query",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "default": "[{\"property\":\"points\",\"direction\":\"DESC\"},{\"property\":\"playerId\",\"direction\":\"ASC\"}]"
+                }
+              },
+            {
+              "name": "cayenneExp",
+              "description": "gameTypeId=2 = regular season, gameTypeId=3 = playoffs, and omitting gameTypeId it will include both regular season and playoffs. Always set the seasonID, but change the years if necessary, for eaxmple: seasonId<=20232024 and seasonId>=20232024. The current season is 20232024 and the lowest season year is 19171918. If searching for a specific player use skaterFullName likeIgnoreCase \"%name%\". If searching for a specific position add: positionCode=\"D\". Where D = defenseman, C = center, L = left wing, R = right wing, C = Center. If searching for players on a specific team use and include: franchiseId=23. Find the franchiseId using the operationId: NHL_team_franchiseIds endpoint.",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "default": "gameTypeId=2 and seasonId<=20232024 and seasonId>=20232024 and skaterFullName likeIgnoreCase \"%Connor McDavid%\" and positionCode=\"D\""
+              }
+            }
+          ]
+        }
+      },
+      "/stats/rest/en/goalie/summary?isGame=false&start=0&factCayenneExp=gamesPlayed>=1": {
+        "get": {
+          "operationId": "NHL_goalies",
+          "summary": "Get a variety of NHL Goalies statistics.",
+          "description": "Retrieves the NHL Goalies and their playerId sorted by either by wins, losses, save percentage, goals against, goals against average, games played, shutouts, shots against, or saves. For seasons from current (2023-2024) to 1917-1918. Search for top goalies or by name.",
+          "parameters": [
+            {
+              "name": "limit",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "default": 10
+              }
+            },
+            {
+                "name": "isAggregate",
+                "in": "query",
+                "description":"Will aggregate (sum) goalies stats into a single sum. Set true when you need to sum data for multiple seasons to find totals across multiple years. Set false when looking at a single season or when you want to find totals on a season by season basis, this will return non-aggregated (summed) totals.",
+                "required": true,
+                "schema": {
+                  "type": "boolean",
+                  "default": false
+                }
+            },
+            {
+                "name": "sort",
+                "description": "Sort in an array of objects like so: [{property:value, direction:DESC}, {property value, direction:ASC}] where the property can be wins, losses, savePct, goalsAgainst, goalsAgainstAverage, gamesPlayed, shutouts, shotsAgainst, or saves. You can add multiple sort properties to the array such as win and savePct, to sort by wins, then by save percentage. The last property is always: {\"property\":\"playerId\",\"direction\":\"ASC\"}",
+                "in": "query",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "default": "[{\"property\":\"wins\",\"direction\":\"DESC\"},{\"property\":\"playerId\",\"direction\":\"ASC\"}]"
+                }
+              },
+            {
+              "name": "cayenneExp",
+              "description": "gameTypeId=2 = regular season, gameTypeId=3 = playoffs, and omitting gameTypeId it will include both regular season and playoffs. Always set the seasonID, but change the years if necessary, for eaxmple: seasonId<=20232024 and seasonId>=20232024. The current season is 20232024 and the lowest season year is 19171918. If searching for a specific player use skaterFullName likeIgnoreCase \"%name%\". If searching for players on a specific team use and include: franchiseId=23. Find the franchiseId using the operationId: NHL_team_franchiseIds endpoint.",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "default": "gameTypeId=2 and seasonId<=20232024 and seasonId>=20232024 and skaterFullName likeIgnoreCase \"%Connor McDavid%\""
+              }
+            }
+          ]
+        }
+      },
+      "/stats/rest/en/team/summary?&isGame=false&start=0&factCayenneExp=gamesPlayed>=1": {
+        "get": {
+          "operationId": "NHL_teams",
+          "summary": "Get a variety of stats for NHL Teams.",
+          "description": "Retrieves the NHL team sorted by either points or wins for any season from current (2023-2024) to 1917-1918. Values can be aggregated (summed) or non-aggregated (summed).",
+          "parameters": [
+            {
+              "name": "limit",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "default": 10
+              }
+            },
+            {
+                "name": "isAggregate",
+                "in": "query",
+                "description":"Will aggregate (sum) team stats into a single sum. Set true when you need to sum data for multiple seasons to find totals across multiple years. Set false when looking at a single season or when you want to find totals on a season by season basis, this will return non-aggregated (summed) totals.",
+                "required": true,
+                "schema": {
+                  "type": "boolean",
+                  "default": true
+                }
+            },
+            {
+                "name": "sort",
+                "description": "Sort in an array of objects like so: [{property:value, direction:DESC}, {property value, direction:ASC}] where the property can be points or wins. You can add multiple sort properties to the array such as points and wins, to sort by points, then by wins.The last property is always: {\"property\":\"franchiseId\",\"direction\":\"ASC\"}",
+                "in": "query",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "default": "[{\"property\":\"points\",\"direction\":\"DESC\"},{\"property\":\"franchiseId\",\"direction\":\"ASC\"}]"
+                }
+              },
+            {
+              "name": "cayenneExp",
+              "description": "gameTypeId=2 is regular season, gameTypeId=3 is playoffs, and omitting gameTypeId will include both regular season and playoffs values. Always set the seasonID, but change the years if necessary, set it like so seasonId<=20232024 and seasonId>=20232024. The current season is 20232024 and the lowest season year you can go is 19171918. To find all time use seasonId<=20232024 and seasonId>=19171918. If searching for a specific team include: franchiseId=int (max 1 per query). To find the franchiseId use the operationId: NHL_team_franchiseIds endpoint. If a team is not specified, it will search for all teams.",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "default": "gameTypeId=2 and seasonId<=20232024 and seasonId>=20232024 and franchiseId=23"
+              }
+            }
+          ]
+        }
+      },
+      "/stats/rest/en/franchise?sort=fullName&include=lastSeason.id&include=firstSeason.id": {
+        "get": {
+          "operationId": "NHL_team_franchiseIds",
+          "summary": "Get all NHL team's franchiseId and name.",
+          "description": "Retrieves the NHL team's franchiseId and name for any season from current (2023-2024) to 1917-1918. The franchiseId can be used for other querys and is = id returned."
+        }
+      }
+    }
+  }
+  

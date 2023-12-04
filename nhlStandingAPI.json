@@ -1,0 +1,59 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "NHL Statistics API",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://api-web.nhle.com",
+        "description": "NHL Standings API Server",
+        "variables": {
+          "date": {
+            "default": "2023-12-02"
+          }
+        }
+      }
+    ],
+    "paths": {
+      "/v1/standings/{date}": {
+        "get": {
+          "operationId": "NHL_teams_standings",
+          "summary": "Get NHL Teams standings by division and conference.",
+          "description": "Retrieves NHL team standings for the current day. Sorted by division and conference. Always use the current date in the format YYYY-MM-DD. Standings are found by using the leagueSequence, conferenceSequence, divisionSequence, and the points property values.",
+          "parameters": [
+            {
+              "name": "date",
+              "description": "Use the current date in the format YYYY-MM-DD. Ask for the current date in that format if unsure.",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                "example": "2023-12-02",
+                "default": "2023-12-02"
+              }
+            }
+          ]
+        }
+      },
+      "/v1/player/{playerId}/landing": {
+        "get": {
+          "operationId": "Player_career_stats",
+          "summary": "Gets NHL players career stats and landing page data.",
+          "description": "Retrieves NHL players career stats and data using their playerId which must first be found using the operationId: NHL_players.",
+          "parameters": [
+            {
+              "name": "playerId",
+              "description": "This must be first obtained from the operationId: NHL_players and then used here.",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      }
+    }
+}
