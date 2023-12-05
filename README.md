@@ -11,3 +11,9 @@
 
 # Save
  Save your GPT and it should be ready to go. Ask it questions about players, goalies and teams. It can retrieve current season data and past seasons back to 1917-1918. Review the OpenAPI json for more a mor ecomprehensive understanding of what it can do!
+
+# Examples
+ Linkedin Post: https://www.linkedin.com/pulse/syntax-sunday-gpt-actions-kade-halabuza-vv7wf 
+ 
+ Shared Chats: 
+  - #1: https://chat.openai.com/share/ec150c92-a200-42b9-a56b-eb95435f925f 
