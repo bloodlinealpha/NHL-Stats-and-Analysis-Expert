@@ -13,7 +13,7 @@
     "paths": {
       "/stats/rest/en/skater/summary?isGame=false&start=0&factCayenneExp=gamesPlayed>=1": {
         "get": {
-          "operationId": "NHL_players",
+          "operationId": "NHL_players_stats",
           "summary": "Get NHL Players by Points, Goals, Assists, or points per game.",
           "description": "Retrieves the NHL players and their playerId sorted by either points, goals, assists or pointsPerGame, for any season from current (2023-2024) to 1917-1918. Search for top players or specific players by name. The playerId can be used for other querys.",
           "parameters": [
@@ -48,7 +48,7 @@
               },
             {
               "name": "cayenneExp",
-              "description": "gameTypeId=2 = regular season, gameTypeId=3 = playoffs, and omitting gameTypeId it will include both regular season and playoffs. Always set the seasonID, but change the years if necessary, for eaxmple: seasonId<=20232024 and seasonId>=20232024. The current season is 20232024 and the lowest season year is 19171918. If searching for a specific player use skaterFullName likeIgnoreCase \"%name%\". If searching for a specific position add: positionCode=\"D\". Where D = defenseman, C = center, L = left wing, R = right wing, C = Center. If searching for players on a specific team use and include: franchiseId=23. Find the franchiseId using the operationId: NHL_team_franchiseIds endpoint.",
+              "description": "gameTypeId=2 = regular season, gameTypeId=3 = playoffs, and omitting gameTypeId it will include both regular season and playoffs. Always set the seasonID, but change the years if necessary, example: seasonId<=20232024 and seasonId>=20232024. The current season is 20232024 and the first season year is 19171918. If searching for a specific player use skaterFullName likeIgnoreCase \"%name%\". If searching for a specific position add: positionCode=\"D\". Where D = defenseman, C = center, L = left wing, R = right wing, C = Center. If searching for players on a specific team use and include: franchiseId=23. Find the franchiseId using the operationId: NHL_team_franchiseIds endpoint.",
               "in": "query",
               "required": true,
               "schema": {
@@ -61,7 +61,7 @@
       },
       "/stats/rest/en/goalie/summary?isGame=false&start=0&factCayenneExp=gamesPlayed>=1": {
         "get": {
-          "operationId": "NHL_goalies",
+          "operationId": "NHL_goalies_stats",
           "summary": "Get a variety of NHL Goalies statistics.",
           "description": "Retrieves the NHL Goalies and their playerId sorted by either by wins, losses, save percentage, goals against, goals against average, games played, shutouts, shots against, or saves. For seasons from current (2023-2024) to 1917-1918. Search for top goalies or by name.",
           "parameters": [
@@ -109,7 +109,7 @@
       },
       "/stats/rest/en/team/summary?&isGame=false&start=0&factCayenneExp=gamesPlayed>=1": {
         "get": {
-          "operationId": "NHL_teams",
+          "operationId": "NHL_teams_stats",
           "summary": "Get a variety of stats for NHL Teams.",
           "description": "Retrieves the NHL team sorted by either points or wins for any season from current (2023-2024) to 1917-1918. Values can be aggregated (summed) or non-aggregated (summed).",
           "parameters": [

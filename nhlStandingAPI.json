@@ -39,9 +39,9 @@
       },
       "/v1/player/{playerId}/landing": {
         "get": {
-          "operationId": "Player_career_stats",
-          "summary": "Gets NHL players career stats and landing page data.",
-          "description": "Retrieves NHL players career stats and data using their playerId which must first be found using the operationId: NHL_players.",
+          "operationId": "NHL_Player_info",
+          "summary": "Gets NHL players landing page info.",
+          "description": "Retrieves NHL players information and data using their playerId which must first be found using the operationId: NHL_players. FInd information such as name, birthday, height, weight, isactive, awards, jersey number, etc. Only use leagueAbbrev = \"NHL\"",
           "parameters": [
             {
               "name": "playerId",
