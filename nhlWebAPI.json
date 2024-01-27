@@ -1,0 +1,97 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "NHL Statistics API",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://api-web.nhle.com",
+        "description": "NHL Standings API Server",
+        "variables": {
+          "date": {
+            "default": "2023-12-02"
+          }
+        }
+      }
+    ],
+    "paths": {
+      "/v1/standings/{date}": {
+        "get": {
+          "operationId": "NHL_teams_standings",
+          "summary": "Get NHL Teams standings by division and conference.",
+          "description": "Retrieves NHL team standings for the current day. Sorted by division and conference. Always use the current date in the format YYYY-MM-DD. Standings are found by using the leagueSequence, conferenceSequence, divisionSequence, and the points property values.",
+          "parameters": [
+            {
+              "name": "date",
+              "description": "Use the current date in the format YYYY-MM-DD. Ask for the current date in that format if unsure.",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                "example": "2023-12-02",
+                "default": "2023-12-02"
+              }
+            }
+          ]
+        }
+      },
+      "/v1/player/{playerId}/landing": {
+        "get": {
+          "operationId": "NHL_Player_general_info",
+          "summary": "Gets NHL players general landing page info.",
+          "description": "Retrieves NHL players general career information and data using their playerId which must first be found using the operationId: NHL_players. Find information such as name, birthday, height, weight, isactive, awards, jersey number, etc. Only use leagueAbbrev = \"NHL\"",
+          "parameters": [
+            {
+              "name": "playerId",
+              "description": "This must be first obtained from the operationId: NHL_players and then used here.",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      "/v1/player/{playerId}/game-log/{seasonId}/{gameTypeId}": {
+        "get": {
+          "operationId": "NHL_Player_game_logs",
+          "summary": "Gets NHL players detailed game logs for regular season and playoffs.",
+          "description": "Retrieves NHL players detailed game by game stats using their playerId which must first be found using the operationId: NHL_players. Use the gameLog property to find the game by game stats for a given season.",
+          "parameters": [
+            {
+              "name": "playerId",
+              "description": "This must be first obtained from the operationId: NHL_players and then used here.",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "seasonId",
+              "description": "Use the current seasonId. Ask for the current seasonId if unsure.",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "default": "20232024"
+              }
+            },
+            {
+              "name": "gameTypeId",
+              "description": "gameTypeId=2 is regular season, gameTypeId=3 is playoffs. Assume regular season if unsure or ask.",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "default": "2"
+              }
+            }
+          ]
+        }
+      }
+    }
+}
