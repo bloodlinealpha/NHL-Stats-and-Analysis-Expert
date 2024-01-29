@@ -7,13 +7,13 @@
  Use the [configuration.json](configuration.json) to build your GPT.
 
 # Actions
- Add the [nhlAPI.json](nhlAPI.json) and [nhlStandingAPI.json](nhlStandingAPI.json) to the Actions section of your GPT
+ Add the [nhlAPI.json](nhlAPI.json), [nhlStandingAPI.json](nhlStandingAPI.json), [bloodlinealpha.json](bloodlinealpha.json) to the Actions section of your GPT
 
 # Save
  Save your GPT and it should be ready to go. Ask it questions about players, goalies and teams. It can retrieve current season data and past seasons back to 1917-1918. Review the OpenAPI json for more a mor ecomprehensive understanding of what it can do!
 
 # Examples
- Linkedin Post: https://www.linkedin.com/pulse/syntax-sunday-gpt-actions-kade-halabuza-vv7wf 
+ Linkedin Post: https://www.linkedin.com/pulse/syntax-sunday-gpt-actions-kade-halabuza-vv7wf
  
  Shared Chats: 
   - #1: https://chat.openai.com/share/ec150c92-a200-42b9-a56b-eb95435f925f 

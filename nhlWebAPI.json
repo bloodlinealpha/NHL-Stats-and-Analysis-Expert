@@ -54,44 +54,6 @@
             }
           ]
         }
-      },
-      "/v1/player/{playerId}/game-log/{seasonId}/{gameTypeId}": {
-        "get": {
-          "operationId": "NHL_Player_game_logs",
-          "summary": "Gets NHL players detailed game logs for regular season and playoffs.",
-          "description": "Retrieves NHL players detailed game by game stats using their playerId which must first be found using the operationId: NHL_players. Use the gameLog property to find the game by game stats for a given season.",
-          "parameters": [
-            {
-              "name": "playerId",
-              "description": "This must be first obtained from the operationId: NHL_players and then used here.",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "seasonId",
-              "description": "Use the current seasonId. Ask for the current seasonId if unsure.",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "default": "20232024"
-              }
-            },
-            {
-              "name": "gameTypeId",
-              "description": "gameTypeId=2 is regular season, gameTypeId=3 is playoffs. Assume regular season if unsure or ask.",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "default": "2"
-              }
-            }
-          ]
-        }
       }
     }
 }
